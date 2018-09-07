@@ -460,15 +460,20 @@
                         </div>
                     </div>
                     <div class="time-select">
-                        <input type="number" name="block-long" value="30" step="5" autocomplete="off"></input>
+                        <input class="time-long" type="number" name="block-long" value="30" step="5" autocomplete="off"></input>
+                        <div class="time-count">
+                            <span class="time-unit" id="m">30</span>
+                            <span class="time-unit">:</span>
+                            <span class="time-unit" id="s">00</span>
+                        </div>
                     </div>
-                    <div class="start-btn" data-start-btn="1">
+                    <div class="start-btn" id="start-btn">
                         <!--TODO-->
                         <span class="btn btn-default" >开始</span>
                     </div>
-                    <div class="cancle-btn hide">
-                        <span class="btn btn-default" data-cancle-option="1">暂停</span>
-                        <span class="btn btn-default" data-cancle-option="0">取消</span>
+                    <div class="cancel-btn-wrapper">
+                        <span class="btn btn-default btn-primary" id="pause-btn" data-pause="1">暂停</span>
+                        <span class="btn btn-danger" id="cancel-btn">取消</span>
                     </div>
                 </div>
             </section>
