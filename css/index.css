@@ -136,6 +136,7 @@ a,li,span,p,input{
 .subject-wrapper{
     border-radius: 6px;
     box-shadow:0 0 15px rgba(0,0,0,0.5);
+    cursor: pointer;
 }
 .subject h1{
     padding: 2.5rem 0 0.5rem;
@@ -194,7 +195,7 @@ a,li,span,p,input{
     overflow: hidden;
 }
 .weekly-nearby td{
-    padding:0.4rem 1rem;
+    padding:0.2rem 0.5rem;
 }
 .weekly-nearby td:nth-child(1){
     border-right:1px solid #595959;
@@ -231,8 +232,7 @@ a,li,span,p,input{
 .weekly-right td:nth-child(1){
     border-left:1px solid #595959;
 }
-#time-block{
-    width:calc(75% / 24);
+.time-block{
     background-color: rgba(0,0,0,0.3);
     position: absolute;
 }
@@ -280,6 +280,7 @@ a,li,span,p,input{
     position: absolute;
     top:0;
     left: 0;
+    transition: all 0.6s;
 }
 .subject-select span{
     height: 30px;
@@ -329,6 +330,9 @@ a,li,span,p,input{
     margin: 0 auto;
     padding:2rem 0;
     width: 150px;
+    display: none;
+}
+#newblock{
     display: none;
 }
 /*-------------------------------------------------------------------------------------------------------*/

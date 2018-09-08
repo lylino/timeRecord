@@ -1,4 +1,8 @@
 $(document).ready(function(){
+    //load block
+    // var today = document.getElementById('today');
+    // var todaydate = new Date()
+    // var todayMonth = todaydate.get
 
     var blue = "#6fb6f7";
     var yellow = "#ffd65c";
@@ -20,8 +24,7 @@ $(document).ready(function(){
         })
     })
 
-    //设置小时间块的样式
-    // TODO：动态
+    //设置时间表的样式
     var weeklyChart = document.getElementsByClassName('weekly-chart');
     var weeklyRight = document.getElementsByClassName('weekly-right');
     var chartWidth = $(weeklyChart).width();
@@ -33,7 +36,7 @@ $(document).ready(function(){
 
     var weeklyBottom = document.getElementsByClassName('weekly-bottom');
     $(weeklyBottom).css({'width':anHour*25,'margin-left':40 - anHour/2});
-
+    // TODO：动态
     var timeBlock = document.getElementById('time-block');
     var table = document.getElementsByClassName('weekly-chart-table');
     var tableWidth = $(table).width();
@@ -44,7 +47,24 @@ $(document).ready(function(){
     var leftDis = (tableWidth-12) * beginTime ;
     $(timeBlock).css({'top':topDis,'left':leftDis,'height':anHour / 2});
 
+
     //倒计时模块
+    var sub = '1';
+    var subject = document.getElementsByClassName('select-option');
+    var subjectWrapper = document.getElementsByClassName('subject-select-slide');
+    $(subjectWrapper).mouseenter(function () {
+        $(subjectWrapper).css('top',0);
+    })
+    $(subject).click(function(){
+        $(subject).removeClass('current');
+        $(this).addClass('current');
+        sub = $(this).attr('data-subject-select');
+        var i = $(subject).index(this);
+        $(subjectWrapper).mouseleave(function () {
+            $(subjectWrapper).css('top',-i*30);
+        })
+    })
+
     var startBtn = document.getElementById('start-btn');
     var cancelBtns = document.getElementsByClassName('cancel-btn-wrapper');
     var cancelBtn = document.getElementById('cancel-btn');
@@ -55,15 +75,20 @@ $(document).ready(function(){
     var EndTime = new Date();
     var t = new Date();
     var timer = null;
-    //开始
+    var relBeginTime = new Date().getTime();
+    var minutes = null;
+        //开始
     $(startBtn).click(function(){
+
         $(timeLong).hide();
         $(timeCount).show();
         $(startBtn).hide();
         $(cancelBtns).show();
 
+        relBeginTime = new Date().getTime();
+        minutes = $(timeLong).val();
         NowTime = new Date();
-        EndTime = NowTime.getTime() + $(timeLong).val() * 1000 * 60;
+        EndTime = NowTime.getTime() +  minutes * 1000 ;
         timer = setInterval(GetRTime,0);
     })
     //暂停
@@ -99,6 +124,9 @@ $(document).ready(function(){
         if(t>=0){
             m=Math.floor(t/1000/60%60);
             s=Math.floor(t/1000%60);
+        }else{
+            addBlock(relBeginTime,minutes,sub);
+            clearInterval(timer);
         }
         m=checkTime(m);
         s=checkTime(s);
@@ -112,4 +140,24 @@ $(document).ready(function(){
         document.getElementById("s").innerHTML = s ;
     }
 
+    //添加小时间块函数
+    function addBlock(beginT,minutes,sub){
+
+        var inputBeginTime = document.getElementById('input-beginTime');
+        var inputBeginDay = document.getElementById('input-beginDay');
+        var inputMinutes = document.getElementById('input-minutes');
+        var inputSub = document.getElementById('input-subject');
+        var submit = document.getElementById('submit2');
+
+        // data-begin-time
+        // data-today
+        var timeInDay = Math.floor(beginT/1000/60%1440);
+        var dayInWeek = Math.floor((4 + beginT/1000/60/60/24) % 7);
+        inputBeginTime.value = timeInDay;
+        inputBeginDay.value = dayInWeek;
+        inputMinutes.value = minutes;
+        inputSub.value = sub;
+        $(submit).click();
+        console.log(1)
+    }
 })

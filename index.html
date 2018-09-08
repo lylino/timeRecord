@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/iconfont.css">
-    <link rel="stylesheet" href="css/mediaQuery.css">
     <link rel="stylesheet" href="css/index.css">
 
     <title>TIME</title>
@@ -18,12 +17,15 @@
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/html5media.min.js"></script>
-    <script src="js/jquery.nav.js"></script>
     <script src="js/index.js"></script>
 </head>
 <body id="page">
 <div class="page-wrapper row">
-    <aside class="left-aside-wrapper col-lg-2" name="left-aside">
+    <!--<form id="loadblock" action="asp/loadblock.asp">-->
+        <!--<input type="date" name="today" id="today"/>-->
+        <!--<input type="submit" name="submit" value="submit" id="submit1"/>-->
+    <!--</form>-->
+    <aside class="left-aside-wrapper col-lg-2" id="left-aside">
         <section class="left-header">
             <span class="left-header-span bold">林尼玛</span>
         </section>
@@ -135,7 +137,7 @@
                                     <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
                                     <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
                                 </table>
-                                <div id="time-block" data-begin-time="360" data-today="6"></div>
+                                <!--<div class="time-block" data-begin-time="360" data-today="6" ></div>-->
                                 <!--TODO: new place for block-->
                             </div>
                             <div class="weekly-bottom">
@@ -451,23 +453,23 @@
                     <div class="subject-select">
                         <div class="subject-select-content">
                             <div class="subject-select-slide">
-                                <span class="select-option current" data-subjct-select="1">数学</span>
-                                <span class="select-option" data-subjct-select="2">专业</span>
-                                <span class="select-option" data-subjct-select="3">英语</span>
-                                <span class="select-option" data-subjct-select="4">政治</span>
+                                <span class="select-option" data-subject-select="1">数学</span>
+                                <span class="select-option" data-subject-select="2">专业</span>
+                                <span class="select-option" data-subject-select="3">英语</span>
+                                <span class="select-option" data-subject-select="4">政治</span>
                                 <!--TODO: select-->
                             </div>
                         </div>
                     </div>
                     <div class="time-select">
-                        <input class="time-long" type="number" name="block-long" value="30" step="5" autocomplete="off"></input>
+                        <input class="time-long" type="number" name="block-long" value="30" step="1" autocomplete="off">
                         <div class="time-count">
-                            <span class="time-unit" id="m">30</span>
+                            <span class="time-unit" id="m"></span>
                             <span class="time-unit">:</span>
-                            <span class="time-unit" id="s">00</span>
+                            <span class="time-unit" id="s"></span>
                         </div>
                     </div>
-                    <div class="start-btn" id="start-btn">
+                    <div class="start-btn" id="start-btn" data-counting="0">
                         <!--TODO-->
                         <span class="btn btn-default" >开始</span>
                     </div>
@@ -475,9 +477,14 @@
                         <span class="btn btn-default btn-primary" id="pause-btn" data-pause="1">暂停</span>
                         <span class="btn btn-danger" id="cancel-btn">取消</span>
                     </div>
-                </div>
-            </section>
-            <section>
+
+                    <form  method="post" id="newblock" action="asp/newblock.asp">
+                        <input type="number" name="beginTime" id="input-beginTime" />
+                        <input type="number" name="beginDay" id="input-beginDay" />
+                        <input type="text" name="minutes" id="input-minutes"/>
+                        <input type="text" name="subject" value="submit" id="input-subject"/>
+                        <input type="submit" name="submit" value="submit" id="submit2"/>
+                    </form>
             </section>
         </aside>
     </div>
